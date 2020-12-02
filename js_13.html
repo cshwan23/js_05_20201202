@@ -1,0 +1,81 @@
+<!-- 
+-------------------------
+js_13.html
+-------------------------
+ -->
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<title></title>
+	<script type="text/javascript">
+		
+			function select( arr2, word ){
+
+				var arr = [];
+
+
+
+				for(var i=0; i<arr2.length; i++){
+
+					for(var j=0; j<arr2[i].length; j++) {
+						
+						var data = arr2[i][j]+"";
+						
+						if(data.indexOf(word)>=0){
+
+							arr.push(arr2[i][1]);
+
+					
+						}
+					}
+				}
+				if (arr.length==0){
+
+					arr.push("\""+ word + "\""+ "라는 단어로는 검색 대상이 없습니다.")
+
+				}
+				return arr.join(" ");
+			}
+
+
+	</script>
+
+</head>
+<body>
+
+	<script type="text/javascript">
+			
+		var arr2 = [
+
+			 [1, "사오정", "801225-1234567", "서울시 금천구 독산동"]
+			,[2, "저팔계", "901225-1234567", "서울시 중구 황학동"]
+			,[3, "손오공", "001225-1234567", "경상남도 거창군 거창읍"]
+			,[4, "황보밍", "011225-1234567", "서울시 광진구 독산동"]
+			,[5, "박인셩", "021225-1234567", "경기도 구리시 토평동"]
+
+		];
+
+		while(true){
+			var search_word = prompt("","");
+
+			if(search_word=="끝"){ 
+
+				break;
+
+			}
+			alert(select(arr2, search_word))
+		}
+
+		
+
+		// document.write( select(arr2, search_word) );
+
+
+	</script>
+
+
+
+
+</body>
+</html>

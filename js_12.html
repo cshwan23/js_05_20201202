@@ -1,0 +1,473 @@
+
+<!-- 
+~~~~~~~~~~~~~~~~~~~~~~~
+js_12.html
+~~~~~~~~~~~~~~~~~~~~~~~
+	=>[Math 객체]의 메소드 사용법을 숙지한다.
+	=>[Math 객체]는 수학적인 계산을 할 수 있는 메소드를 가지고 있다.
+	=>[Math 객체]는 객체 생성을 하지 않고 아래 형식으로 메소드나 속성변수를 호출한다.
+		----------------
+		Math.메소드(~)
+		Math.속성변수
+		----------------
+ -->
+
+
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<title></title>
+	<script type="text/javascript">
+		
+
+		//**************************************
+		//두 숫자 사이의 무작위 정수를 리턴하는 함수 선언하기
+		//**************************************
+		function getRandomNum(minNum , maxNum){
+
+			//변수 minNum 안의 숫자 부터 변수 maxNum 안의 숫자 까지 중 랜덤한 숫자 하나 리턴하기 
+			return Math.floor(Math.random()* (maxNum-minNum+1) + minNum);
+		}
+
+
+
+
+		//**************************************
+		// 두 숫자 사이의 무작위 정수를 n개 뽑아서 Array 객체에 담아 리턴하는 함수 선언하기
+		// 단 Array 객체 안의 데이터는 중복되면 안된다.
+		//**************************************
+		function getRandomNum_arr(minNum , maxNum, n){
+
+			// n개의 정수 데이터 저장할 Array 객체 생성하기
+			var arr = [];
+			
+			// Array 객체의 배열변수 n개 미만이면 반복문 계속 돌기
+			while(arr.length<n){
+
+				// 변수 minNum 안의 숫자 부터 변수 maxNum 안의 숫자까지 중 랜덤한 숫자 하나 얻기
+				var randomNum = getRandomNum( minNum, maxNum);
+
+				//Array 객체에서 랜덤한 숫자가 없으면 Array 객체에 랜덤한 숫자 저장하기
+				if(is_of_arr(arr, randomNum)==false){
+					arr.push( randomNum );
+				}
+			}
+			// Array 객체 안의 배열변수 안의 데이터를 오름차순으로 재배치하기
+			arr.sort(function(left,right){return left-right;});
+
+			//Array 객체 메위주 리턴하기
+			return arr;
+		}
+
+
+		//**************************************
+		// Array 객체 안에 중복 데이터가 있는지 여부를 확인하는 함수 선언하기
+		//**************************************
+		function is_of_arr( arrObj, data){
+
+			// flag 변수에 false 저장하기
+			var flag = false;
+			
+				// 매개변수로 들어온 Array 객체 안에
+				// 매개변수 2번째로 들어온 데이터가 있으면 flag 변수에 true 저장하고 반복문 중단하기		
+				for(var i=0; i<arrObj.length; i++){
+
+					if(arrObj[i] == data){
+
+						flag = true;
+
+						break;
+					}
+
+				}
+			// flag 변수 안의 데이터를 리턴하기 
+			return flag;
+
+		}
+
+
+
+
+
+
+
+
+
+
+	</script>
+	
+</head>
+<body>
+
+
+	<script type="text/javascript">
+		
+		
+
+		//--------------------------
+		// 3개의 변수 선언하고 실수 저장하기
+		//--------------------------
+
+		var kor = 85.4;
+
+		var eng = 81.5;
+
+		var mat = 74.9;
+
+
+		//------------------------------------
+		// Math 객체의 max(~) 메소드 호출로 최대값 리턴
+		//------------------------------------		
+		document.write(Math.max(kor,eng,mat)+"<hr>");
+
+
+		//------------------------------------
+		// Math 객체의 min(~) 메소드 호출로 최소값 리턴
+		//------------------------------------		
+		document.write(Math.min(kor,eng,mat)+"<hr>");
+
+
+
+		//------------------------------------
+		// Math 객체의 ceil(~) 메소드 호출로 소수 1자리를 무조건 올림해서 리턴하기
+		// 소수 1자리에서 무조건 올림하므로 숫자는 커진다.
+		//------------------------------------
+		document.write(Math.ceil(kor)+"<br>");
+		document.write(Math.ceil(eng)+"<br>");
+		document.write(Math.ceil(mat)+"<br>");
+		document.write(Math.ceil(-7.1)+"<br>");  // -7 (커진다)
+		document.write(Math.ceil(7.0)+"<hr>");	 // 7 (버릴게없다)
+
+
+
+		//------------------------------------
+		// Math 객체의 floor(~) 메소드 호출로 소수 1자리를 무조건 버림해서 리턴하기
+		// 소수 1자리에서 무조건 버리므로 숫자는 작아진다.
+		//------------------------------------
+		document.write(Math.floor(kor)+"<br>");
+		document.write(Math.floor(eng)+"<br>");
+		document.write(Math.floor(mat)+"<br>");
+		document.write(Math.floor(-7.1)+"<br>");  // -8 (작아진다)
+		document.write(Math.floor(7.0)+"<hr>");   // 7 (버릴게없다)
+
+
+
+		//------------------------------------
+		// Math 객체의 round(~) 메소드 호출로 소수 1자리를 반올림해서 리턴하기
+		// 즉 소수 1자리가 5이상이면 올림, 5미만이면 버린다.
+		// 즉 소수 1자리가 5이상이면 ceil , 5미만이면 floor 메소드와 동일하다.
+		//------------------------------------
+		document.write(Math.round(kor)+"<br>");
+		document.write(Math.round(eng)+"<br>");
+		document.write(Math.round(mat)+"<hr>");
+
+
+
+		//------------------------------------
+		// Math 객체의 abs(~) 메소드 호출로 절대값 리턴하기
+		// 즉 음수를 양수로 바꿔 리턴한다.
+		//------------------------------------
+		document.write(Math.abs(-7)+"<hr>");
+
+
+
+		//------------------------------------
+		// Math 객체의 random(~) 메소드 호출로 0~1 미만의 무작위 실수 리턴하기
+		// 즉 음수를 양수로 바꿔 리턴한다.
+		//------------------------------------
+		document.write(Math.random( ) + "<hr>");
+
+
+
+		//------------------------------------
+		// 1~45 까지의 정수 중 랜덤한 정수 1개 리턴하기
+		//------------------------------------
+		document.write(Math.random()*45+"<hr>");
+			// 0~45미만의 실수가 리턴
+		document.write(Math.random()*45+1+"<hr>");
+			// 1~46미만의 실수가 리턴
+		document.write(Math.floor(Math.random()*45+1)+"<hr>");
+			// 1~46미만의 실수의 소수점을 버려버린다.
+
+
+
+		//------------------------------------
+		// 1~45 까지의 정수 중 랜덤한 정수 6개 리턴하기
+		//------------------------------------
+		document.write(
+					Math.floor(Math.random()*45+1)
+			+ " " + Math.floor(Math.random()*45+1)
+			+ " " + Math.floor(Math.random()*45+1)
+			+ " " + Math.floor(Math.random()*45+1)
+			+ " " + Math.floor(Math.random()*45+1)
+			+ " " + Math.floor(Math.random()*45+1)
+			+"<hr>"
+
+		);
+
+
+
+
+
+		//------------------------------------
+		// 로또 번호 1000원 어치 출력하기
+		// 중복된 숫자가 나오면 안된다.
+		//------------------------------------
+		document.write("로또 번호 1000원 어치 출력하기<hr>");
+
+
+
+		//------------------------------------
+		// 변수 lottos 를 선언하고 Array 객체 생성하고 객체의 메위주 저장
+		//------------------------------------
+		var lottos = []; // var lottos = new Array(); 와 동일
+
+		for(var i=0; i<6; i++){
+
+			var randomNo = Math.floor(Math.floor(Math.random()*45+1));
+			
+
+			var flag = false;
+
+				for(var j=0; j<lottos.length; j++){
+
+					if(randomNo == lottos[j]){
+
+						flag = true;
+
+						break;
+					}
+
+				}
+
+			if(flag==true){ i--; continue;}
+
+			lottos.push(randomNo);
+
+		}
+		document.write(lottos.join(", ")+"<hr>");
+
+		//------------------------------------
+		// 변수 lottos 를 선언하고 Array 객체 생성하고 객체의 메위주 저장
+		// while문 활용 
+		//------------------------------------
+		var lottos = []; // var lottos = new Array(); 와 동일
+
+		
+		//------------------------------------
+		// lottos 안에 저장된 Array 객체 안의 배열변수가 6개 미만이면
+		// 계속 도는 반복문 선언하기
+		// 즉 로또 번호가 6미만이 계속 돌면서 로또 번호 뽑기
+		//------------------------------------
+		while(lottos.length<6){
+
+			// 1~45 사이의 무작위 정수 얻기
+			var randomNo = Math.floor(Math.floor(Math.random()*45+1));
+
+			// flag 변수에 false 저장
+			// flag 변수에는 위에서 뽑은 로또 번호의 중복 여부가 저장된다.
+			// false 면 중복 안됐다는 의미이고 true 면 중복됐다는 의미를 저장하는 변수 선언
+			var flag = false;
+
+				// 위에서 뽑은 번호가 lottos 안에 저장된 Array 객체 안에 있으면
+				// flag 변수에 true 저장하고 반복문 중단하기
+				for(var j=0; j<lottos.length; j++){
+
+					if(randomNo == lottos[j]){
+
+						flag = true;
+
+						break;
+					}
+
+				}
+
+			//flag 변수에 false가 저장되어 있으면
+			// lottos 안에 저장된 Array 객체에 로또번호 저장하기
+			if(flag == false){
+				lottos.push(randomNo);
+			}
+			// else{ alert(randomNo + "숫자는 이미 있습니다.")}
+
+		}
+		//------------------------------------
+		// lottos 안에 저장된 Array 객체 안의 배열변수를 오름차순으로 재배치하기
+		//------------------------------------
+		lottos.sort(function(left,right){return left-right;});
+
+		//------------------------------------
+		// lottos 안에 저장된 Array 객체 안에 데이터를 ", "를 붙여 출력하기
+		//------------------------------------
+		document.write(lottos.join(", ")+"<hr>");
+
+
+
+
+
+		//------------------------------------
+		// 로또 번호 5000원 어치 출력하기 <방법1>
+		// 중복된 숫자가 나오면 안된다.
+		//------------------------------------
+		document.write("<h3>로또 번호 5000원 어치 출력하기 <방법1></h3><hr>");
+
+		
+
+		for(var i = 0; i<5; i++){
+
+			var lottos = [];
+
+			while(lottos.length<6){
+
+				
+				var randomNo = Math.floor(Math.floor(Math.random()*45+1));
+
+				
+				var flag = false;
+
+					
+					for(var j=0; j<lottos.length; j++){
+
+						if(randomNo == lottos[j]){
+
+							flag = true;
+
+							break;
+						}
+
+					}
+
+				
+				if(flag == false){
+					lottos.push(randomNo);
+				}
+				
+
+			}
+			
+		lottos.sort(function(left,right){return left-right;});
+
+		document.write(lottos.join(", ")+"<br>");
+		document.write("---------------------------"+"<br>");
+
+	}
+
+
+
+
+
+		//**************************************
+		// 로또 번호 5000원 어치 출력하기 <방법2>
+		// 중복된 숫자가 나오면 안된다.
+		//**************************************
+		document.write("<hr><h3>로또 번호 5000원 어치 출력하기 <방법2></h3><hr>");
+
+
+		for( var i = 1;i<=6;i++){
+		//------------------------------------
+		// Array 객체 생성하고 1-45까지 저장하기
+		//------------------------------------
+		var lottos = [];
+
+		for(var j = 1; j<=45; j++){
+			lottos.push(j);
+		}
+		
+
+		for(var j=0; j<1000; j++){
+		//------------------------------------
+		// Array 객체 안의 배열변수 2개를 무작위로 선택해서 데이터를 바꾸기
+		//------------------------------------
+		//인덱스 번호 0~44번까지의 무작위 숫자중 두개 골라내어 변수 idx1, idx2에 저장하기
+		var idx1 = Math.floor(Math.random()*45)
+		var idx2 = Math.floor(Math.random()*45)
+
+		// index 번호 idx1, idx2 에 해당하는 두 배열 변수 안의 데이터를 교환하기
+		var tmp = lottos[idx1];
+		lottos[idx1] = lottos[idx2];
+		lottos[idx2] = tmp;
+		
+		}
+		// Array 객체 안의 배열변수 중 인덱스 번호 0-5까지 복사해서 새로운 Array 객체 생성하기
+		var arr = lottos.slice(0,6);
+
+		// 새로운 Array 객체 안의 데이터를 오름차순으로 재 배치하기
+		arr.sort(function(left,right){return left-right;});
+		
+		// 새로운 Array 객체 안의 데이터를 붙여 출력하기. 중간에 " "삽입하기.
+		document.write(arr.join(" ")+"<br>");
+
+}
+		document.write("<hr>");
+
+
+		//**************************************
+		// 로또 번호 5000원 어치 출력하기 <방법3>
+		// 중복된 숫자가 나오면 안된다.
+		//**************************************
+		document.write("<hr><h3>로또 번호 5000원 어치 출력하기 <방법3></h3><hr>");
+
+		document.write("<table border=1 bordercolor='red' cellpadding=5 style='border-collapse:collapse;'>");
+		for (var j=0; j<5; j++){
+			document.write("<tr><td>"+getRandomNum_arr(1,45,6).join("<td>"));
+		}
+
+		document.write("</table>");
+		document.write("<hr>");
+
+
+		document.write(getRandomNum(1,45)+"<hr>");
+		document.write(getRandomNum_arr(1,45, 4));
+
+
+
+		document.write("<hr>");
+		document.write("<hr>");
+
+
+
+
+
+		//**************************************
+		// 지정한 평균 점수 1개를 가지고 5개의 무작위 점수를 출력해주세요.
+		// 무작위 뽑은 점수들의 평균은 지정한 평균과 동일해야한다.
+		//**************************************
+
+		var avg = 80;
+		var five_nums_avg = [];
+
+
+		while( true){
+			var nums = [];
+		
+
+			for(var i = 0; i <5; i++){
+
+				nums.push(Math.floor(Math.random()*(95-40+1)+40));
+			
+			}
+			
+			var avg_nums = (nums[0]+nums[1]+nums[2]+nums[3]+nums[4])/5
+
+			if (avg_nums==80){
+
+				five_nums_avg.push(nums);
+				break;
+			}
+
+
+		}
+
+		document.write(five_nums_avg.join(" "));
+
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
